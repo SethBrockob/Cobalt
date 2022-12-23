@@ -3,6 +3,7 @@ import {  Routes, Route, BrowserRouter } from "react-router-dom";
 import AuthContext from './components/auth/authContext';
 import { ProtectedRoute } from './components/auth/protectedRoute';
 import GridScreen from './screens/dataGrid/dataGrid';
+import HomeScreen from './screens/home/home';
 import LoginScreen from './screens/login/login';
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
 
     <Route element={<ProtectedRoute />}>
               
-      <Route path="/home" element={<GridScreen />} />
+      <Route path="/data" element={<GridScreen />} />
+      <Route path="/home" element={<HomeScreen />} />
             
     </Route>
     <Route path="/" element={<LoginScreen />} />

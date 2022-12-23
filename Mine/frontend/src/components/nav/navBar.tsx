@@ -13,7 +13,9 @@ import { mineralType } from '../../types/mineral';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import AuthContext from "../../components/auth/authContext";
+import { useContext } from 'react';
 
 export default function NavBar() {
 
@@ -23,12 +25,26 @@ export default function NavBar() {
 
   const [minerals, setMinerals] = React.useState<mineralType[]>([]);
 
+  const ctx = React.useContext(AuthContext);
+
+  const homeHandle = () => {
+    ctx!.setAuthentication(true);
+    return <Navigate to="/home" />;
+  };
+
+  
+
+
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
 
+  
+  
+
   const logOutHandle = () => {
-    <Navigate to="/" />;
+    ctx!.setAuthentication(false);
+    return <Link to="/" />;
   };
 
   const getMinerals = async () => {
@@ -41,7 +57,8 @@ export default function NavBar() {
     <><Box>
     <List>
     <ListItem disablePadding>
-      <ListItemButton onClick={() => {
+      <ListItemButton
+           onClick={() => {
               setOpen(true);
             }}
             className={'add-btn'} >
@@ -116,6 +133,14 @@ export default function NavBar() {
           <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
             Cobalt
           </Typography>
+
+          <Button
+            color="inherit"
+            onClick={homeHandle}
+            >
+            Home
+            </Button>   
+
           <Button
             color="inherit"
             onClick={logOutHandle}
