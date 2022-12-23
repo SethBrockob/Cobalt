@@ -1,32 +1,17 @@
 import React from "react";
-import { Box, Button, createTheme, Paper } from "@mui/material";
+import { Box, Button, } from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import NavBar from "../../components/nav/navBar";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: '#467eac',
-      main: '#9500ae',
-      dark: '#004346',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#467eac',
-      main: '#829baf',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
 
 function GridScreen() {
   
   const url = "http://127.0.0.1:8000/api/"
 
   const [rows,setRows] = useState([])
+  
 
   useEffect(() => {
     axios.get(url)
@@ -107,7 +92,6 @@ function GridScreen() {
            getRowId={(row: any) => row.mineralType}
            />
 
-           
           
 
         </Box>
