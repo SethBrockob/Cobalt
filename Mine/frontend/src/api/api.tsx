@@ -1,12 +1,11 @@
 import axios from "axios";
 
-
 class API {
   static url = "http://127.0.0.1:8000/";
 }
 
 export class MineralAPI extends API {
-  static async post_Mineral(data:any) {
+  static async post_Mineral(data: any) {
     return await axios
       .post(`${this.url}api/`, data)
       .then((response) => {
@@ -28,7 +27,7 @@ export class MineralAPI extends API {
       });
   }
 
-  static async updateMineral(data:any) {
+  static async updateMineral(data: any) {
     return await axios
       .put(`${this.url}api/`, data)
       .then((response) => {
