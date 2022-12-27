@@ -1,30 +1,24 @@
-import { Box } from '@mui/material';
-import ReactPieChart from '../../components/charts/pie';
-import NavBar from '../../components/nav/navBar';
+import { Box } from "@mui/material";
+import ReactPieChart from "../../components/charts/pie";
+import NavBar from "../../components/nav/navBar";
 
-
-function HomeScreen() { 
-
+function HomeScreen() {
   return (
     <>
-    <NavBar/>
+      <NavBar />
 
-    <Box
-    sx={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      minHeight: "100vh",
-      backgroundColor: "grey",
-      
-    }}>
-    <ReactPieChart />
-    </Box>
-
-    
-
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          backgroundColor: "grey",
+        }}
+      >
+        <ReactPieChart />
+      </Box>
     </>
-
   );
 }
 
