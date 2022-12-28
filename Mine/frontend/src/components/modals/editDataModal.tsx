@@ -25,10 +25,12 @@ export default function EditModal({
   onClose,
   openEdit,
   getMineral,
+  cellValues
 }: {
   onClose: () => void;
   openEdit: boolean;
   getMineral: () => void;
+  cellValues: any;
 }) {
   const [mineralDetails, setMineralDetails] = React.useState({
     mineralType: "",
@@ -68,7 +70,7 @@ export default function EditModal({
     ) {
       setEmptyFields(true);
     } else {
-      MineralAPI.post_Mineral(mineralDetails)
+      MineralAPI.updateMineral(cellValues.row.id, mineralDetails)
         .then(() => {
           getMineral();
           onClose();

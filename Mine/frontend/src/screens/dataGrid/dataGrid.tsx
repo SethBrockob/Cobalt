@@ -1,35 +1,22 @@
 import React from "react";
-import { Box, Button, createTheme, Paper } from "@mui/material";
-import {DataGrid} from "@mui/x-data-grid";
-import {useEffect, useState} from "react";
+import { Box, Button,} from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "../../components/nav/navBar";
+
+import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
+
 import { mineralType } from "../../types/mineral";
 import { MineralAPI } from "../../api/api";
+import MineralOptions from "../../components/modals/multiPurposeModal";
+import AddMineral from "../../components/modals/addDataModal";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: '#467eac',
-      main: '#9500ae',
-      dark: '#004346',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#467eac',
-      main: '#829baf',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
+
 
 function GridScreen() {
   const [openAdd, setOpenAdd] = React.useState(false);
-  const [openDel, setOpenDel] = React.useState(false);
   const [openOptions, setOpenOptions] = React.useState(false);
 
   const [minerals, setMinerals] = React.useState<mineralType[]>([]);
@@ -38,11 +25,12 @@ function GridScreen() {
     const response = await MineralAPI.getMineral();
     setMinerals(response.data);
     console.log(response);
+    console.log(minerals)
   };
 
   const url = "http://127.0.0.1:8000/api/";
 
-  const [rows,setRows] = useState([])
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     axios
@@ -127,24 +115,65 @@ function GridScreen() {
           {
             field: "picture",
             headerName: "Picture",
-            headerClassName: 'picture-header-class',
-            width: 228 },
-            
-            ]}
-           pageSize={5}
-           rowsPerPageOptions={[5]}
-           experimentalFeatures={{newEditingApi:true}}
-           getRowId={(row: any) => row.mineralType}
-           />
+            headerClassName: "picture-header-class",
+            width: 228,
+          },
 
-           
-          
+          {
+            field: "options",
+            headerName: "Options",
+            headerClassName: "options-header-class",
+            renderCell: (cellValues) => {
+              return (
+                <Button
+                  onClick={() => {
+                    setOpenOptions(true);
+                  }}
+                  className={"options-btn"}
+                >
+                  {openOptions && (
+                    <MineralOptions
+                      openOp={openOptions}
+                      onClose={() => {
+                        setOpenOptions(false);
+                      }}
+                      getMineral={getMinerals}
+                      cellValues={cellValues}
+                    />
+                  )}
+                  <SettingsIcon />
+                  Options
+                </Button>
+              );
+            },
+          },
+        ]}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        experimentalFeatures={{ newEditingApi: true }}
+        getRowId={(row: any) => row.mineralType}
+      />
 
-        </Box>
-        
-      );
-
-
+      <Button
+        onClick={() => {
+          setOpenAdd(true);
+        }}
+        className={"add-btn"}
+      >
+        {openAdd && (
+          <AddMineral
+            open={openAdd}
+            onClose={() => {
+              setOpenAdd(false);
+            }}
+            getMineral={getMinerals}
+          />
+        )}
+        <AddIcon />
+        Add
+      </Button>
+    </Box>
+  );
 }
 
 export default GridScreen;

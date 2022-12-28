@@ -30,10 +30,12 @@ export default function MineralOptions({
   onClose,
   openOp,
   getMineral,
+  cellValues
 }: {
   onClose: () => void;
   openOp: boolean;
   getMineral: () => void;
+  cellValues: Object;
 }) {
   const [openOptionsState, setOpenOptionsState] = React.useState(openOp);
   const [openDel, setOpenDel] = React.useState(false);
@@ -80,6 +82,7 @@ export default function MineralOptions({
                   setOpenDel(false);
                 }}
                 getMineral={getMinerals}
+                cellValues={cellValues}
               />
             )}
             <DeleteForeverIcon />
@@ -99,6 +102,7 @@ export default function MineralOptions({
                   setOpenEdit(false);
                 }}
                 getMineral={getMinerals}
+                cellValues={cellValues}
               />
             )}
             <EditIcon />

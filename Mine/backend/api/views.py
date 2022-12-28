@@ -29,9 +29,9 @@ class MineralView(generics.CreateAPIView):
         a.save()
         return Response(status=status.HTTP_200_OK)
 
-    def update(self, request, id):
+    def put(self, request):
         data = request.data
-        obj = Mineral.objects.get(id=id)
+        obj = Mineral.objects.get(id=data["id"])
         obj.mineralType = data["mineralType"]
         obj.atomicWeight = data["atomicWeight"]
         obj.pricePerKg = data["pricePerKg"]
@@ -40,8 +40,9 @@ class MineralView(generics.CreateAPIView):
         obj.save()
         return Response(status=status.HTTP_200_OK)
 
-    def delete(self, request, id):
-        obj = Mineral.objects.get(id=id)
+    def delete(self, request):
+        # print(request.data)
+        obj = Mineral.objects.get(id=request.data["id"])
         obj.delete()
         return Response(status=status.HTTP_200_OK)
         
