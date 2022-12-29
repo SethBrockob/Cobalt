@@ -7,6 +7,7 @@ import { Stack } from "@mui/material";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 
 import DeleteModal from "../../components/modals/deleteDataModal";
 import EditModal from "./editDataModal";
@@ -22,7 +23,7 @@ const style = {
   width: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
-  boxShadow: 24,
+  // boxShadow: 24,
   p: 4,
 };
 
@@ -30,16 +31,16 @@ export default function MineralOptions({
   onClose,
   openOp,
   getMineral,
-  cellValues
+  cellValues,
 }: {
   onClose: () => void;
   openOp: boolean;
   getMineral: () => void;
   cellValues: Object;
 }) {
-  const [openOptionsState, setOpenOptionsState] = React.useState(openOp);
   const [openDel, setOpenDel] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
+  const [openMulti, setOpenMulti] = React.useState(true);
 
   const [minerals, setMinerals] = React.useState<mineralType[]>([]);
 
@@ -47,6 +48,7 @@ export default function MineralOptions({
     const response = await MineralAPI.getMineral();
     setMinerals(response.data);
     console.log(response);
+    console.log(minerals);
   };
 
   return (
@@ -57,8 +59,17 @@ export default function MineralOptions({
       aria-describedby="simple-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Would you like to Delete or edit this Mineral
+        <Button sx={{ ml: 45, mb: 5 }}
+          onClick={() => {setOpenMulti(false); onClose();}}>
+          <CloseIcon />
+        </Button>
+        <Typography
+          sx={{ m: 1, textAlign: "center" }}
+          id="modal-modal-title"
+          variant="h5"
+          component="h2"
+        >
+          Delete or edit this Mineral ?
         </Typography>
         <Stack
           direction="row"
@@ -70,6 +81,7 @@ export default function MineralOptions({
           }}
         >
           <Button
+            sx={{ m: 3 }}
             onClick={() => {
               setOpenDel(true);
             }}

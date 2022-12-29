@@ -41,10 +41,6 @@ export default function AddMineral({
     picture: ""
   });
 
-  const [file, setFile]  = React.useState<File | null>(null);
-  
-  
-
 
   function StructureChanged(value: any) {
     setMineralDetails({ ...mineralDetails, crystalStructure: value.toString() });

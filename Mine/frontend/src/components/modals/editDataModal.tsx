@@ -33,14 +33,13 @@ export default function EditModal({
   cellValues: any;
 }) {
   const [mineralDetails, setMineralDetails] = React.useState({
-    mineralType: "",
-    atomicWeight: 0,
-    pricePerKg: 0,
-    crystalStructure: "",
-    picture: "",
+    mineralType: cellValues.row.mineralType,
+    atomicWeight: cellValues.row.atomicWeight,
+    pricePerKg: cellValues.row.pricePerKg,
+    crystalStructure: cellValues.row.crystalStructure,
+    picture: cellValues.row.picture,
   });
 
-  const [file, setFile] = React.useState<File | null>(null);
 
   function StructureChanged(value: any) {
     setMineralDetails({
@@ -65,8 +64,7 @@ export default function EditModal({
       data.mineralType === "" ||
       data.atomicWeight === 0 ||
       data.pricePerKg === 0 ||
-      data.crystalStructure === "" ||
-      data.picture === ""
+      data.crystalStructure === ""
     ) {
       setEmptyFields(true);
     } else {
@@ -142,12 +140,13 @@ export default function EditModal({
               label=""
               variant="outlined"
               size="small"
-              onChange={(e) =>
+              onChange={(e:any) =>
                 setMineralDetails({
                   ...mineralDetails,
                   mineralType: e.target.value,
                 })
               }
+              value={mineralDetails.mineralType}
             />
             <Typography
               sx={{
@@ -166,12 +165,13 @@ export default function EditModal({
               label=""
               variant="outlined"
               size="small"
-              onChange={(e) =>
+              onChange={(e:any) =>
                 setMineralDetails({
                   ...mineralDetails,
                   atomicWeight: parseInt(e.target.value),
                 })
               }
+              value={mineralDetails.atomicWeight}
             />
             <Typography
               sx={{
@@ -190,12 +190,13 @@ export default function EditModal({
               label=""
               variant="outlined"
               size="small"
-              onChange={(e) =>
+              onChange={(e:any) =>
                 setMineralDetails({
                   ...mineralDetails,
                   pricePerKg: parseInt(e.target.value),
                 })
               }
+              value={mineralDetails.pricePerKg}
             />
           </Box>
           <Box>
@@ -213,6 +214,7 @@ export default function EditModal({
               sx={{ width: "100%" }}
               size={"small"}
               onChange={(e) => StructureChanged(e.target.value)}
+              value={mineralDetails.crystalStructure}
             >
               <MenuItem value="Cubic">Cubic</MenuItem>
               <MenuItem value="Tetragonal">Tetragonal</MenuItem>
@@ -234,7 +236,7 @@ export default function EditModal({
               Picture:
             </Typography>
             <Button component="label">
-              <input type="file" onChange={onFileInputChange} />
+              <input type="file" onChange={onFileInputChange}/>
             </Button>
           </Box>
         </Box>

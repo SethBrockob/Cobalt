@@ -1,7 +1,5 @@
 import axios from "axios";
-// import "./styles.css";
-import React, { useCallback, useState } from "react";
-import * as echarts from 'echarts';
+
 import ReactECharts from 'echarts-for-react';
 
 
@@ -31,7 +29,7 @@ var option = {
       name: "Minerals",
       type: "pie",
       radius: "50%",
-      data: data
+      data: data,
     }
   ]
 }
@@ -40,4 +38,4 @@ var option = {
 export default function PieChart() {
   console.log(data);
   console.log(option.series);
-  return(<ReactECharts option={option}/>)};
+  return(<ReactECharts option={option}  />)};

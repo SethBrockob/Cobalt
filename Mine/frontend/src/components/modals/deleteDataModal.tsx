@@ -20,9 +20,9 @@ const style = {
 
 const url = "http://127.0.0.1:8000/api/";
 
-function deleteElement(id: string) {
-  axios.delete(url, { data: { id: id } }).then((res) => {
-    console.log(res);
+async function deleteElement(id: string) {
+  return await axios.delete(url, { data: { id: id } }).then((res) => {
+    console.log(res); return res;
   });
 }
 
@@ -38,9 +38,11 @@ export default function DeleteMineral({
   cellValues: any;
 }) {
 
+  const [openDelState, setOpenDelState] = React.useState(true);
+
   return (
     <Modal
-      open={openDel}
+      open={openDel && openDelState}
       onClose={onClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
@@ -76,17 +78,16 @@ export default function DeleteMineral({
           <Button
             onClick={() => {
               console.log(cellValues.row);
-              deleteElement(cellValues.row.id);
-              onClose();
+              deleteElement(cellValues.row.id).then(() => {setOpenDelState(false); onClose()});
+              // onClose();
               
             }}
           >
             Yes
           </Button>
           <Button
-            onClick={() => {
-              onClose();
-            }}
+            onClick={() => {setOpenDelState(false); onClose();}}
+            
           >
             No
           </Button>

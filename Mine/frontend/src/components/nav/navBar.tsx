@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 
 import { Avatar } from '@mui/material';
 
-import { redirect } from 'react-router-dom';
+import { Navigate,} from 'react-router-dom';
 import AuthContext from '../auth/authContext';
 
 export default function NavBar() {
@@ -17,7 +17,9 @@ export default function NavBar() {
   const ctx = React.useContext(AuthContext);
 
   const handleHomeClick = () => {
-    redirect("/home");
+    <Navigate to="/home" />
+    
+    return console.log("clicked") ;
   };
   
 

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import ReactPieChart from '../../components/charts/pie';
 import PieChart from '../../components/charts/pie2';
 import NavBar from '../../components/nav/navBar';
+
 
 
 function HomeScreen() { 
@@ -18,9 +18,8 @@ function HomeScreen() {
       backgroundColor: "grey", 
       height:300,
       width:300,
-      
-    }}>
-    <PieChart  />
+      }}>
+    <PieChart />
     </Box>
 
     
